@@ -183,6 +183,16 @@ This project is part of the Global Shapers Community Taipei Hub, an initiative u
 
 The project is built in public and will be open sourced. Every milestone, learning, and technical decision is shared openly.
 
+## The Multi-Player Difference
+
+Most AI assistants are single-player — you ask a question, you get an answer based on general internet knowledge. That answer is the same whether you're running a 5-person startup in Taipei or a 500-person NGO in Nairobi.
+
+The Community Intelligence Layer is multi-player. It learns from every community builder who uses it. When a team in Bangkok discovers a breakthrough onboarding technique, and you ask about onboarding two days later, you benefit from their discovery — even though you've never met them.
+
+This creates a compounding knowledge effect: the more people use it, the smarter it gets for everyone. No single person's Custom GPT can replicate this, because no single person has access to the collective operational wisdom of hundreds of community builders worldwide.
+
+The AI is just the interface. The real product is the community's collective intelligence.
+
 ## How This Gets Better (The Flywheel)
 
 This system improves through use. Every interaction is fuel:
