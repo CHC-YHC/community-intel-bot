@@ -41,17 +41,31 @@ async function saveInteraction(phone, role, content) {
   if (error) throw new Error(`saveInteraction failed: ${error.message}`);
 }
 
-// Get recent conversation history for context
-async function getHistory(phone, limit = 20) {
+// Fix 3: Get recent conversation history (limited to 10)
+async function getRecentHistory(phone, limit = 10) {
   const { data, error } = await supabase
     .from('interactions')
     .select('role, content')
     .eq('phone', phone)
-    .order('created_at', { ascending: true })
+    .order('created_at', { ascending: false })
     .limit(limit);
 
-  if (error) throw new Error(`getHistory failed: ${error.message}`);
-  return data || [];
+  if (error) throw new Error(`getRecentHistory failed: ${error.message}`);
+  return (data || []).reverse(); // reverse to chronological order
 }
 
-module.exports = { supabase, saveUser, getUser, saveInteraction, getHistory };
+// Fix 4: Check daily message limit
+async function checkDailyLimit(phone, maxPerDay = 50) {
+  const today = new Date().toISOString().split('T')[0];
+  const { count, error } = await supabase
+    .from('interactions')
+    .select('*', { count: 'exact', head: true })
+    .eq('phone', phone)
+    .eq('role', 'user')
+    .gte('created_at', today + 'T00:00:00Z');
+
+  if (error) throw new Error(`checkDailyLimit failed: ${error.message}`);
+  return (count || 0) < maxPerDay;
+}
+
+module.exports = { supabase, saveUser, getUser, saveInteraction, getRecentHistory, checkDailyLimit };
